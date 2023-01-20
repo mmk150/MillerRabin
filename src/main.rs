@@ -11,8 +11,6 @@ use std::fs::File;
 use std::path::Path;
 use std::fs::OpenOptions;
 use rayon::prelude::*;
-use primes::{Sieve,PrimeSet};
-
 
 
 
@@ -103,9 +101,27 @@ fn powmod(base:u64, exponent:u64, modulus: u64)-> u64{
     return true;
   }
 
+  fn check_prime(x: u64)-> bool {
+    let pvec:Vec<u64>=vec![2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41];
+    let mut s:u64;
+    let mut d:u64;
+    (s,d)=decomp(x);
+    let res:bool=false;
+    for p in pvec{
+      let res=is_mr_witness(p, x, s, d);
+      if res==true{
+        return false;
+      }
+    }
 
-  fn non_witness_set_x(number: u64,isprime:bool) {
+    return true;
 
+  }
+
+
+  fn non_witness_set_x(number: u64) {
+
+    let isprime:bool=check_prime(number);
 
     let mut s:u64;
     let mut d:u64;
@@ -145,28 +161,20 @@ fn powmod(base:u64, exponent:u64, modulus: u64)-> u64{
   
   }
 
-  fn non_witness_range(lower_bound:u64,upper_bound:u64,mut pset:Sieve){
-    fn isprime(x:u64,mut pset:Sieve)-> bool{
-      return pset.is_prime(x);
-    }
+  fn non_witness_range(lower_bound:u64,upper_bound:u64){
     let mut vec: Vec<u64>=(lower_bound..=upper_bound).step_by(2).collect();
     vec.par_iter()
-    .for_each(|x| {
-      let isprime=isprime(*x,pset);
-      non_witness_set_x(*x,isprime)});
+    .for_each(|x| non_witness_set_x(*x));
   }
 
   
 
 
 fn main(){
-  
-  let mut pset=Sieve::new();  
-  let (p1,p2) =pset.find(1_000_000);
-  
   let a:u64=19_000_601;
   let b:u64=19_000_639;
-  non_witness_range(a,b, pset);
+  
+  non_witness_range(a,b);
 
 
 }
