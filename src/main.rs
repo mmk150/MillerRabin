@@ -171,8 +171,8 @@ fn powmod(base:u64, exponent:u64, modulus: u64)-> u64{
 
 
 fn main(){
-  let a:u64=19_000_601;
-  let b:u64=19_000_639;
+  let a:u64=1_000_601;
+  let b:u64=1_003_639;
   
   non_witness_range(a,b);
 
