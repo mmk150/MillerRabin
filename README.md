@@ -1,7 +1,7 @@
 # Investigating the Miller-Rabin Primality Test (Revisited)
 
 
-This repository hold some revisited and revamped research code from an old project of mine, along with some exposition.
+This repository holds some revisited and revamped research code from an old project of mine, along with some exposition.
 
 **Table of Contents**
 1. [Project Summary](#project-summary)
