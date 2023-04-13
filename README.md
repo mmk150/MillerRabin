@@ -40,7 +40,7 @@ The Rust code in ``main.rs`` has done the following:
 - For a given integer, generate the complete set of its Miller-Rabin non-witnesses and save this to a text file.
 - Do this for a large range of values, using the ``rayon`` crate to handle running them in parallel and a buffered writer to make the file I/O less problematic.
 
-To give you an idea of the complexity, this is going to be approximately ``O(N^3)`` operations, where ``N`` is the upper bound for our range. In the 2015 version of this project, even writing the data collection script in C produced something that crawled along. The 2023 version of me is wiser, and has optimized the file I/O so that things don't slow to a crawl, as well as implemented multithreading for good measure.
+To give you an idea of the complexity, this is going to be approximately ``O(N^2)`` operations, where ``N`` is the upper bound for our range. In the 2015 version of this project, even writing the data collection script in C produced something that crawled along. The 2023 version of me is wiser, and has optimized the file I/O so that things don't slow to a crawl, as well as implemented multithreading for good measure.
 
 
 ## Data Analysis
